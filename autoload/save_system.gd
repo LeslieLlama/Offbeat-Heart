@@ -4,8 +4,7 @@ var moons_collected = 0
 var current_save_position : Vector2
 
 func _ready() -> void:
-	#load_game()
-	pass
+	Signals.savepoint_activated.connect(set_current_savepoint_pos)
 	
 func set_current_savepoint_pos(new_pos):
 	current_save_position = new_pos
