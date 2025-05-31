@@ -1,0 +1,79 @@
+[gd_scene load_steps=10 format=3 uid="uid://c6i0pa1ckktdo"]
+
+[ext_resource type="Script" uid="uid://dwl2mefe0jmbq" path="res://Scripts/player_movement.gd" id="1_cvnsp"]
+[ext_resource type="Texture2D" uid="uid://v1n42rcr7afr" path="res://Sprites/HeartbeatTest.png" id="2_6t5aa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pxd2v"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tp66r"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iq20c"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5230n"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rct2e"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tp66r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pxd2v")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tp66r")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iq20c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5230n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rct2e")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ph8ol"]
+radius = 5.0
+height = 16.0
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_cvnsp")
+speed = 300
+jump_speed = -800
+gravity = 3000
+friction = 0.208
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_tp66r")
+animation = &"jump"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_ph8ol")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-1, 0)

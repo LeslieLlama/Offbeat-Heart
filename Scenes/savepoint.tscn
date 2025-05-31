@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://w15mph4fuhye"]
+
+[ext_resource type="Script" uid="uid://bmuqxe2lgd4j" path="res://Scripts/savepoint.gd" id="1_3a246"]
+[ext_resource type="Texture2D" uid="uid://b17v83hci1kdl" path="res://Sprites/Savepoint_not-active.png" id="1_3iula"]
+[ext_resource type="Texture2D" uid="uid://dtgeppolmxybm" path="res://Sprites/Savepoint_active.png" id="2_bp67v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3rba1"]
+size = Vector2(11, 18)
+
+[node name="Savepoint" type="Area2D"]
+texture_filter = 1
+script = ExtResource("1_3a246")
+texture_active = ExtResource("2_bp67v")
+texture_not_active = ExtResource("1_3iula")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -1)
+shape = SubResource("RectangleShape2D_3rba1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_3iula")
+
+[connection signal="body_entered" from="." to="." method="_on_hitbox_body_entered"]

@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://ckk80uncglfiu"]
+
+[ext_resource type="Script" uid="uid://b6wmq1db82kwq" path="res://Scripts/powerup.gd" id="1_dkaad"]
+[ext_resource type="Texture2D" uid="uid://bkqdxl7n5knue" path="res://Sprites/MoonIcon.png" id="2_athsx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pxd2v"]
+
+[node name="Collectible" type="Area2D"]
+script = ExtResource("1_dkaad")
+powerup_name = "egress"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_athsx")
+region_rect = Rect2(0.189789, 32.04, 2.97287, 3.108)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_pxd2v")
+
+[connection signal="body_entered" from="." to="." method="_on_hitbox_body_entered"]

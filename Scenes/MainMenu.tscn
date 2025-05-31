@@ -1,0 +1,47 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgf7ork6sg4bu"]
+
+[ext_resource type="Script" uid="uid://drjna7861j5sq" path="res://Scripts/menu_button.gd" id="1_tt5f1"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -1.0
+offset_right = 481.0
+offset_bottom = 301.0
+color = Color(0.243137, 0.0627451, 0.215686, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 67.0
+offset_top = 49.0
+offset_right = 403.0
+offset_bottom = 123.0
+theme_override_colors/font_color = Color(0.94902, 0.807843, 0.85098, 1)
+theme_override_font_sizes/font_size = 46
+text = "Off-Beat Heart "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 90.0
+offset_top = 167.0
+offset_right = 212.0
+offset_bottom = 201.0
+text = "Start"
+script = ExtResource("1_tt5f1")
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 90.0
+offset_top = 206.0
+offset_right = 212.0
+offset_bottom = 240.0
+text = "Options"
