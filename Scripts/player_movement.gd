@@ -30,7 +30,9 @@ func _ready() -> void:
 	animated_sprite = $AnimatedSprite2D
 	Signals.new_room_entered.connect(_on_new_room_entered)
 	Signals.room_exited.connect(_on_room_exited)
+	Signals.game_loaded.connect(_game_loaded)
 	cam = $Camera2D
+	
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("left"):
 		#animated_sprite.flip_h = true
@@ -38,6 +40,8 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("right"):
 		#animated_sprite.flip_h = false
 		facing_dir = 1
+	if Input.is_key_pressed(KEY_R):
+		respawn()
 		
 
 
@@ -106,13 +110,25 @@ func flip_dive():
 		#animated_sprite.modulate = Color("ffffff")
 	
 func external_death():
-	velocity = Vector2(500*-facing_dir,-500)
+	#velocity = Vector2(250*-facing_dir,-250)
 	is_dead = true
+	animated_sprite.visible = false
+	$CPUParticles2D.emitting = true
 	#animated_sprite.play("death")
-	collision_layer = 0b00000000_00000000_00000000_00000000
-	collision_mask = 0b00000000_00000000_00000000_00000000
+	#collision_layer = 0b00000000_00000000_00000000_00000000
+	#collision_mask = 0b00000000_00000000_00000000_00000000
 	await get_tree().create_timer(1).timeout
 	respawn()
+	
+func respawn():
+	print("respawn!")
+	animated_sprite.visible = true
+	is_dead = false
+	#collision_layer = 0b00000000_00000000_00000000_00000001
+	#collision_mask = 0b00000000_00000000_00000000_00000001
+	velocity = Vector2.ZERO
+	position = Vector2(SaveSystem.current_save_position.x, SaveSystem.current_save_position.y)
+	#_set_cam(current_area)
 	
 func _on_new_room_entered(area: Area2D) -> void:
 	new_area = area
@@ -150,12 +166,12 @@ func _set_cam(area: Area2D):
 	cam.limit_bottom = cam.limit_top + size.y
 	cam.limit_right = cam.limit_left + size.x
 	
-func respawn():
-	position = SaveSystem.current_save_position
-	is_dead = false
-	collision_layer = 0b00000000_00000000_00000000_00000001
-	collision_mask = 0b00000000_00000000_00000000_00000001
-	velocity = Vector2.ZERO
+
+func _game_loaded():
+	if SaveSystem.collectibles_gained.has("egress"):
+		has_egress_powerup = true
+	respawn()
+
 func aquire_powerup(powerup_name):
 	if powerup_name == "egress":
 		has_egress_powerup = true

@@ -10,8 +10,9 @@ func _ready() -> void:
 	self_position = position
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
-	Signals.emit_signal("savepoint_activated", self_position)
+	
 	if body.is_in_group("player"):
+		Signals.emit_signal("savepoint_activated", self_position)
 		is_active = true
 		$Sprite2D.texture = texture_active
 		
