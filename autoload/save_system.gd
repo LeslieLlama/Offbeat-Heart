@@ -7,6 +7,9 @@ var collectibles_gained = []
 func _ready() -> void:
 	Signals.savepoint_activated.connect(set_current_savepoint_pos)
 	Signals.collectible_obtained.connect(_collectible_obtained)
+	Signals.game_started.connect(_game_started)
+	
+func _game_started():
 	await get_tree().create_timer(0.01).timeout
 	load_game()
 	
@@ -18,11 +21,15 @@ func set_current_savepoint_pos(new_pos):
 	print(str("save point activated : ", current_save_position))
 	save_game()
 
+func clear_save():
+	current_save_position = Vector2(64,216)
+	collectibles_gained.clear()
+	save_game()
+
 func save():
 	var save_dict = {
 		"current_save_position" : [current_save_position.x, current_save_position.y],
-		"thingsCollected" : collectibles_gained,
-		"egress_powerup_aquired" : false
+		"thingsCollected" : collectibles_gained
 	}
 	return save_dict
 	

@@ -1,14 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://bgf7ork6sg4bu"]
+[gd_scene load_steps=3 format=3 uid="uid://bgf7ork6sg4bu"]
 
-[ext_resource type="Script" uid="uid://drjna7861j5sq" path="res://Scripts/menu_button.gd" id="1_tt5f1"]
+[ext_resource type="Script" uid="uid://ccwjagrvjwmkg" path="res://Scripts/main_menu.gd" id="1_853f1"]
 
-[node name="Control" type="Control"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8saeu"]
+
+[node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_853f1")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -29,19 +32,103 @@ text = "Off-Beat Heart "
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="."]
+[node name="StartButton" type="Button" parent="."]
 layout_mode = 0
 offset_left = 90.0
 offset_top = 167.0
 offset_right = 212.0
 offset_bottom = 201.0
 text = "Start"
-script = ExtResource("1_tt5f1")
 
-[node name="Button2" type="Button" parent="."]
+[node name="ClearSaveButton" type="Button" parent="."]
 layout_mode = 0
 offset_left = 90.0
 offset_top = 206.0
 offset_right = 212.0
 offset_bottom = 240.0
-text = "Options"
+text = "Clear Save"
+
+[node name="ClearSavePanel" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.5
+offset_top = -81.0
+offset_right = 150.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8saeu")
+
+[node name="Label" type="Label" parent="ClearSavePanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -52.5
+offset_right = 52.5
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Are you sure?"
+
+[node name="ClearSave" type="Button" parent="ClearSavePanel"]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 87.0
+offset_right = 120.0
+offset_bottom = 121.0
+text = "Clear Save"
+
+[node name="Back" type="Button" parent="ClearSavePanel"]
+layout_mode = 0
+offset_left = 169.0
+offset_top = 87.0
+offset_right = 258.0
+offset_bottom = 121.0
+text = "Return"
+
+[node name="ClearedSavePanel" type="Panel" parent="ClearSavePanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.5
+offset_top = -81.0
+offset_right = 150.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8saeu")
+
+[node name="Label" type="Label" parent="ClearSavePanel/ClearedSavePanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -48.0
+offset_top = 41.0
+offset_right = 57.0
+offset_bottom = 64.0
+grow_horizontal = 2
+text = "Save Cleared"
+
+[node name="Back" type="Button" parent="ClearSavePanel/ClearedSavePanel"]
+layout_mode = 0
+offset_left = 110.5
+offset_top = 108.0
+offset_right = 199.5
+offset_bottom = 142.0
+text = "Return"
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="ClearSaveButton" to="." method="_on_clear_save_button_pressed"]
+[connection signal="pressed" from="ClearSavePanel/ClearSave" to="." method="_on_clear_save_pressed"]
+[connection signal="pressed" from="ClearSavePanel/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="ClearSavePanel/ClearedSavePanel/Back" to="." method="_on_back_pressed"]
