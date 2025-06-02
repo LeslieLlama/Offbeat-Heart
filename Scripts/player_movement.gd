@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
-@export var speed = 1200
-@export var jump_speed = -1800
-@export var gravity = 4000
+@export var speed = 200
+@export var jump_speed = -600
+@export var gravity = 3000
 @export_range(0.0, 1.0) var friction = 0.1
 @export_range(0.0 , 1.0) var acceleration = 0.25
 var cam : Camera2D 
@@ -69,8 +69,6 @@ func _physics_process(delta):
 		if current_jumps < max_jumps:
 			velocity.y = jump_speed
 			current_jumps += 1
-	#if Input.is_action_just_released("down") and is_on_floor():
-		#get_parent().new_rabbit(position)
 		
 	if is_on_floor() || is_on_ceiling():
 		current_jumps = 0

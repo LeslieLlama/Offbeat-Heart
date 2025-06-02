@@ -10,3 +10,5 @@ signal room_exited(area2d : Area2D, roomname : String)
 
 signal game_started()
 signal game_loaded()
+
+signal TurnEnd()
