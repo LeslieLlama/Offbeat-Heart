@@ -78,4 +78,28 @@ offset_top = 249.0
 offset_right = 281.0
 offset_bottom = 295.0
 
+[node name="DialougePanel" type="Panel" parent="."]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -76.0
+offset_right = 200.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="DialougePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Hot digitty
+this is some
+dialouge "
+
 [connection signal="timeout" from="GlobalTimer" to="." method="_on_global_timer_timeout"]

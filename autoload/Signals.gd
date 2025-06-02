@@ -12,3 +12,6 @@ signal game_started()
 signal game_loaded()
 
 signal TurnEnd()
+
+signal new_dialouge(dialouge : String)
+signal end_dialouge()

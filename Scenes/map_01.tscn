@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://ctnl6406yqme6"]
+[gd_scene load_steps=23 format=4 uid="uid://ctnl6406yqme6"]
 
 [ext_resource type="PackedScene" uid="uid://c6i0pa1ckktdo" path="res://Scenes/player.tscn" id="1_iq20c"]
 [ext_resource type="Texture2D" uid="uid://v1n42rcr7afr" path="res://Sprites/HeartbeatTest.png" id="1_ph8ol"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://w15mph4fuhye" path="res://Scenes/savepoint.tscn" id="6_tp66r"]
 [ext_resource type="PackedScene" uid="uid://ci2jrw56wm6hp" path="res://Scenes/camera_zone.tscn" id="8_546ff"]
 [ext_resource type="Script" uid="uid://cy0mi1ycc4due" path="res://Scripts/enemy_basic.gd" id="9_id6oe"]
+[ext_resource type="Script" uid="uid://cfrllwo0huxpu" path="res://Scripts/npc_1.gd" id="10_8idbb"]
+[ext_resource type="Texture2D" uid="uid://boi86imbwxyjs" path="res://Sprites/MusicNoteNPCs.png" id="10_p5bod"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3rba1"]
 texture = ExtResource("1_ph8ol")
@@ -64,6 +66,28 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3lklq"]
 radius = 6.0
 height = 16.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yo1qh"]
+atlas = ExtResource("10_p5bod")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3lklq"]
+atlas = ExtResource("10_p5bod")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f5jmh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yo1qh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3lklq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
 
 [node name="Node2D" type="Node2D"]
 
@@ -126,6 +150,7 @@ script = ExtResource("9_id6oe")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="EnemyBasic"]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_yo1qh")
+autoplay = "default"
 frame_progress = 0.653722
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBasic"]
@@ -142,6 +167,7 @@ script = ExtResource("9_id6oe")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="EnemyBasic2"]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_yo1qh")
+autoplay = "default"
 frame_progress = 0.653722
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBasic2"]
@@ -149,5 +175,25 @@ shape = SubResource("CapsuleShape2D_3lklq")
 
 [node name="RayCast2D" type="RayCast2D" parent="EnemyBasic2"]
 target_position = Vector2(19, 0)
+
+[node name="NPC_1" type="Node2D" parent="."]
+position = Vector2(328, 120)
+script = ExtResource("10_8idbb")
+lines = ["Howdy", "Howdy,,, 2!"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="NPC_1"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_f5jmh")
+autoplay = "default"
+frame_progress = 0.589246
+flip_h = true
+
+[node name="RayCast2D" type="RayCast2D" parent="NPC_1"]
+position = Vector2(0, 4)
+target_position = Vector2(-16, 0)
+
+[node name="RayCast2D2" type="RayCast2D" parent="NPC_1"]
+position = Vector2(0, 4)
+target_position = Vector2(16, 0)
 
 [editable path="EgressPowerup"]
