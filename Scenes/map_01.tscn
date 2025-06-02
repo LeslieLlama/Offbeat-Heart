@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://w15mph4fuhye" path="res://Scenes/savepoint.tscn" id="6_tp66r"]
 [ext_resource type="PackedScene" uid="uid://ci2jrw56wm6hp" path="res://Scenes/camera_zone.tscn" id="8_546ff"]
 [ext_resource type="Script" uid="uid://cy0mi1ycc4due" path="res://Scripts/enemy_basic.gd" id="9_id6oe"]
-[ext_resource type="Script" uid="uid://cfrllwo0huxpu" path="res://Scripts/npc_1.gd" id="10_8idbb"]
+[ext_resource type="Script" uid="uid://cfrllwo0huxpu" path="res://Scripts/npc.gd" id="10_8idbb"]
 [ext_resource type="Texture2D" uid="uid://boi86imbwxyjs" path="res://Sprites/MusicNoteNPCs.png" id="10_p5bod"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3rba1"]
@@ -140,7 +140,10 @@ position = Vector2(480, 0)
 position = Vector2(960, 0)
 
 [node name="CameraZone4" parent="." instance=ExtResource("8_546ff")]
-position = Vector2(480, 300)
+position = Vector2(1440, 0)
+
+[node name="CameraZone5" parent="." instance=ExtResource("8_546ff")]
+position = Vector2(0, 300)
 
 [node name="EnemyBasic" type="CharacterBody2D" parent="."]
 position = Vector2(296, 232)
