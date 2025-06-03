@@ -2,7 +2,8 @@ extends CharacterBody2D
 
 @export var speed = 200
 @export var jump_speed = -600
-@export var gravity = 3000
+@export var base_gravity = 3000
+var gravity = 3000
 @export_range(0.0, 1.0) var friction = 0.1
 @export_range(0.0 , 1.0) var acceleration = 0.25
 var cam : Camera2D 
@@ -18,8 +19,10 @@ var is_frozen : bool = false
 var tilemap : TileMapLayer
 var animated_sprite : AnimatedSprite2D
 var is_flipped : bool = false
-
+var can_flip : bool = false
 var has_egress_powerup : bool = false
+
+var is_ghost_walking = false
 
 var new_area : Area2D
 var current_area : Area2D
@@ -32,6 +35,7 @@ func _ready() -> void:
 	Signals.room_exited.connect(_on_room_exited)
 	Signals.game_loaded.connect(_game_loaded)
 	cam = $Camera2D
+	gravity = base_gravity
 	
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("left"):
@@ -60,19 +64,27 @@ func _physics_process(delta):
 	else:
 		velocity.x = lerp(velocity.x, 0.0, friction)
 		
-	if has_egress_powerup == true:
+	if has_egress_powerup == true and can_flip == true:
 		if Input.is_action_just_pressed("down") and (is_on_floor() or is_on_ceiling()):
 			flip_dive()
 		
 	
 	if Input.is_action_just_pressed("action_1"):
+		if is_ghost_walking == true:
+			return
 		if current_jumps < max_jumps:
 			velocity.y = jump_speed
 			current_jumps += 1
+			
+	if Input.is_action_pressed("action_2"):
+		if is_on_floor() || is_on_ceiling():
+			ghost_walk(true)
+	if Input.is_action_just_released("action_2"):
+		ghost_walk(false)
 		
 	if is_on_floor() || is_on_ceiling():
 		current_jumps = 0
-	if dir != 0 and (is_on_floor() or is_on_ceiling()):
+	if dir != 0 and (is_on_floor() or is_on_ceiling() or is_ghost_walking == true):
 		animated_sprite.play("walk")
 	#elif is_on_floor() == false and current_jumps >= 1:
 		#animated_sprite.play("double_jump")
@@ -91,6 +103,11 @@ func _physics_process(delta):
 			var is_spike = data.get_custom_data("Damage")
 			if is_spike == true and is_dead == false:
 				external_death()
+			var is_flippable = data.get_custom_data("Flippable")
+			if is_flippable == true:
+				can_flip = true
+			else: 
+				can_flip = false
 
 #func equip(item : Node2D):
 	#heldItem = item
@@ -107,14 +124,22 @@ func flip_dive():
 	#else:
 		#animated_sprite.modulate = Color("ffffff")
 	
+func ghost_walk(is_active : bool):
+	if is_active == true:
+		gravity = 0
+		is_ghost_walking = true
+		$GhostFloorSprite.visible = true
+	else: 
+		gravity = base_gravity
+		is_ghost_walking = false
+		$GhostFloorSprite.visible = false
+	
+	
 func external_death():
 	#velocity = Vector2(250*-facing_dir,-250)
 	is_dead = true
 	animated_sprite.visible = false
 	$CPUParticles2D.emitting = true
-	#animated_sprite.play("death")
-	#collision_layer = 0b00000000_00000000_00000000_00000000
-	#collision_mask = 0b00000000_00000000_00000000_00000000
 	await get_tree().create_timer(1).timeout
 	respawn()
 	
@@ -122,11 +147,9 @@ func respawn():
 	print("respawn!")
 	animated_sprite.visible = true
 	is_dead = false
-	#collision_layer = 0b00000000_00000000_00000000_00000001
-	#collision_mask = 0b00000000_00000000_00000000_00000001
 	velocity = Vector2.ZERO
 	position = Vector2(SaveSystem.current_save_position.x, SaveSystem.current_save_position.y)
-	#_set_cam(current_area)
+
 	
 func _on_new_room_entered(area: Area2D) -> void:
 	new_area = area
@@ -168,9 +191,17 @@ func _set_cam(area: Area2D):
 func _game_loaded():
 	if SaveSystem.collectibles_gained.has("egress"):
 		has_egress_powerup = true
+	if SaveSystem.collectibles_gained.has("jumpshroom"):
+		pass
+	if SaveSystem.collectibles_gained.has("ghostwalk"):
+		pass
 	respawn()
 
 func aquire_powerup(powerup_name):
 	if powerup_name == "egress":
 		has_egress_powerup = true
+	if powerup_name == "jumpshroom":
+		pass
+	if powerup_name == "ghostwalk":
+		pass
 	

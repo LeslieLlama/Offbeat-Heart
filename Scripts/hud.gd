@@ -49,8 +49,8 @@ func _map_update(_area: Area2D):
 	
 	#480,300
 	var pos : Vector2
-	pos.x = _area.position.x/480
-	pos.y = _area.position.y/300
+	pos.x = _area.global_position.x/480
+	pos.y = _area.global_position.y/300
 	
 	var cell = pos.y * $PausePanel/MapPanel/GridContainer.columns
 	cell += pos.x

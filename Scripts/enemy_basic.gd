@@ -13,7 +13,6 @@ func _ready() -> void:
 	
 func _physics_process(delta: float) -> void:
 	if $RayCast2D.is_colliding() == true:
-		print("aa")
 		dir *=- 1
 		$RayCast2D.target_position.x *=-1
 	
