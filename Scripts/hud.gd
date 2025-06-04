@@ -8,15 +8,20 @@ func _ready() -> void:
 	Signals.collectible_obtained.connect(collectible_aquired)
 	Signals.new_dialouge.connect(_new_dialouge)
 	Signals.new_room_entered.connect(_map_update)
-	for i in 16:
+	Signals.game_loaded.connect(_game_loaded)
+	for i in 36:
 		var child_node = ColorRect.new()
-		child_node.custom_minimum_size = Vector2(10,10)
+		child_node.custom_minimum_size = Vector2(20,20)
 		rooms.append(child_node)
 		$PausePanel/MapPanel/GridContainer.add_child(child_node)
 
-func collectible_aquired(powerupName):
-	#$MoonCounter.text = str("Moons : ",SaveSystem.moons_collected,"/20")
-	pass
+func collectible_aquired(powerup_name):
+	if powerup_name == "egress":
+		$PausePanel/EgressPowerupSlot/TextureRect.visible = true
+	if powerup_name == "jumpshroom":
+		$PausePanel/JumpShroomPowerupSlot/TextureRect.visible = true
+	if powerup_name == "ghostwalk":
+		$PausePanel/GhostwalkPowerupSlot/TextureRect.visible = true
 		
 func _process(delta: float) -> void:
 	$GlobalTimerMeter.value = 100-($GlobalTimer.time_left * 100)
@@ -24,6 +29,7 @@ func _process(delta: float) -> void:
 		if pause_menu_on == false:
 			$PausePanel.visible = true
 			pause_menu_on = true
+			$PausePanel/BackButton.grab_focus()
 			_pause_game(true)
 		else: 
 			$PausePanel.visible = false
@@ -62,3 +68,24 @@ func _on_global_timer_timeout() -> void:
 	
 func _pause_game(is_pause : bool):
 	get_tree().paused = is_pause
+	
+func _game_loaded():
+	if SaveSystem.collectibles_gained.has("egress"):
+		$PausePanel/EgressPowerupSlot/TextureRect.visible = true
+	if SaveSystem.collectibles_gained.has("jumpshroom"):
+		$PausePanel/JumpShroomPowerupSlot/TextureRect.visible = true
+	if SaveSystem.collectibles_gained.has("ghostwalk"):
+		$PausePanel/GhostwalkPowerupSlot/TextureRect.visible = true
+		
+
+
+
+func _on_return_to_menu_button_pressed() -> void:
+	_pause_game(false)
+	get_tree().change_scene_to_file("res://Scenes/MainMenu.tscn")
+	
+	
+func _on_back_button_pressed() -> void:
+	$PausePanel.visible = false
+	pause_menu_on = false
+	_pause_game(false)

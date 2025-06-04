@@ -1,7 +1,7 @@
 extends Node
 
-
-var current_save_position : Vector2 = Vector2(64,216)
+var starting_position : Vector2 = Vector2(1008,216) 
+var current_save_position : Vector2 = Vector2(1008,216) 
 var collectibles_gained = []
 
 func _ready() -> void:
@@ -22,7 +22,7 @@ func set_current_savepoint_pos(new_pos):
 	save_game()
 
 func clear_save():
-	current_save_position = Vector2(64,216)
+	current_save_position = starting_position
 	collectibles_gained.clear()
 	save_game()
 

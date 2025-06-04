@@ -1,6 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bf6kthiki7c7q"]
+[gd_scene load_steps=6 format=3 uid="uid://bf6kthiki7c7q"]
 
 [ext_resource type="Script" uid="uid://cpbbpam8d58uj" path="res://Scripts/hud.gd" id="1_e0onf"]
+[ext_resource type="Texture2D" uid="uid://8t8i8h1itnqg" path="res://Sprites/EgressPowerupIcon.png" id="2_6fbih"]
+[ext_resource type="Texture2D" uid="uid://bv8pftw7jprj0" path="res://Sprites/JumpPowerup_Icon.png.png" id="3_t1xeu"]
+[ext_resource type="Texture2D" uid="uid://cl2pk1vaxo6h0" path="res://Sprites/GhostwalkPowerupIcon.png.png" id="4_36asn"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fccik"]
 
@@ -69,7 +72,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-columns = 4
+columns = 6
 
 [node name="CollectiblesPanel" type="Panel" parent="PausePanel"]
 layout_mode = 0
@@ -92,6 +95,71 @@ offset_left = 237.0
 offset_top = 249.0
 offset_right = 281.0
 offset_bottom = 295.0
+
+[node name="TextureRect" type="TextureRect" parent="PausePanel/EgressPowerupSlot"]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_6fbih")
+
+[node name="JumpShroomPowerupSlot" type="Panel" parent="PausePanel"]
+layout_mode = 0
+offset_left = 292.0
+offset_top = 249.0
+offset_right = 336.0
+offset_bottom = 295.0
+
+[node name="TextureRect" type="TextureRect" parent="PausePanel/JumpShroomPowerupSlot"]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_t1xeu")
+
+[node name="GhostwalkPowerupSlot" type="Panel" parent="PausePanel"]
+layout_mode = 0
+offset_left = 347.0
+offset_top = 249.0
+offset_right = 391.0
+offset_bottom = 295.0
+
+[node name="TextureRect" type="TextureRect" parent="PausePanel/GhostwalkPowerupSlot"]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_36asn")
 
 [node name="DialougePanel" type="Panel" parent="."]
 visible = false
@@ -118,3 +186,5 @@ this is some
 dialouge "
 
 [connection signal="timeout" from="GlobalTimer" to="." method="_on_global_timer_timeout"]
+[connection signal="pressed" from="PausePanel/ReturnToMenuButton" to="." method="_on_return_to_menu_button_pressed"]
+[connection signal="pressed" from="PausePanel/BackButton" to="." method="_on_back_button_pressed"]

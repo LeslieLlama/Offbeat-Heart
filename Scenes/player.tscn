@@ -75,7 +75,7 @@ height = 16.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_cvnsp")
-jump_speed = -800
+jump_speed = -400
 friction = 0.208
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

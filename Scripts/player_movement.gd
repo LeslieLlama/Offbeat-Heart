@@ -20,9 +20,12 @@ var tilemap : TileMapLayer
 var animated_sprite : AnimatedSprite2D
 var is_flipped : bool = false
 var can_flip : bool = false
-var has_egress_powerup : bool = false
-
 var is_ghost_walking = false
+
+var has_egress_powerup : bool = false
+var has_jumpshroom_powerup : bool = false
+var has_ghostwalk_powerup : bool = false
+
 
 var new_area : Area2D
 var current_area : Area2D
@@ -72,11 +75,14 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("action_1"):
 		if is_ghost_walking == true:
 			return
+		if has_jumpshroom_powerup == false:
+			return
 		if current_jumps < max_jumps:
 			velocity.y = jump_speed
 			current_jumps += 1
+			can_flip = false
 			
-	if Input.is_action_pressed("action_2"):
+	if Input.is_action_pressed("action_2") and has_ghostwalk_powerup == true:
 		if is_on_floor() || is_on_ceiling():
 			ghost_walk(true)
 	if Input.is_action_just_released("action_2"):
@@ -118,7 +124,8 @@ func flip_dive():
 	gravity *= -1
 	jump_speed *= -1
 	dive_offset *= -1
-	animated_sprite.flip_v = !animated_sprite.flip_v
+	#animated_sprite.flip_v = !animated_sprite.flip_v
+	self.scale.y *= -1
 	#if is_flipped == true:
 		#animated_sprite.modulate = Color("000000")
 	#else:
@@ -192,16 +199,16 @@ func _game_loaded():
 	if SaveSystem.collectibles_gained.has("egress"):
 		has_egress_powerup = true
 	if SaveSystem.collectibles_gained.has("jumpshroom"):
-		pass
+		has_jumpshroom_powerup = true
 	if SaveSystem.collectibles_gained.has("ghostwalk"):
-		pass
+		has_ghostwalk_powerup = true
 	respawn()
 
 func aquire_powerup(powerup_name):
 	if powerup_name == "egress":
 		has_egress_powerup = true
 	if powerup_name == "jumpshroom":
-		pass
+		has_jumpshroom_powerup = true
 	if powerup_name == "ghostwalk":
-		pass
+		has_ghostwalk_powerup = true
 	
