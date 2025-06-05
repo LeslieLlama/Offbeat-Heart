@@ -7,16 +7,21 @@ var doorA_active : bool = false
 var doorB_active : bool = false
 
 var player
-
+var tweenA
+var tweenB
 func _ready() -> void:
 	$ScoobyDoorA/UpIcon.visible = false
 	$ScoobyDoorB/UpIcon.visible = false
 	arrowA_starting_pos = $ScoobyDoorA/UpIcon.position
 	arrowB_starting_pos = $ScoobyDoorB/UpIcon.position
-	var tweenA = get_tree().create_tween().set_loops()
+	if tweenA:
+		tweenA.kill()
+	tweenA = get_tree().create_tween().bind_node(self).set_loops()
 	tweenA.tween_property($ScoobyDoorA/UpIcon, "position:y", (arrowA_starting_pos.y-4), 1).set_trans(Tween.TRANS_SINE)
 	tweenA.tween_property($ScoobyDoorA/UpIcon, "position:y", (arrowA_starting_pos.y), 1).set_trans(Tween.TRANS_SINE)
-	var tweenB = get_tree().create_tween().set_loops()
+	if tweenB:
+		tweenB.kill()
+	tweenB = get_tree().create_tween().bind_node(self).set_loops()
 	tweenB.tween_property($ScoobyDoorB/UpIcon, "position:y", (arrowB_starting_pos.y-4), 1).set_trans(Tween.TRANS_SINE)
 	tweenB.tween_property($ScoobyDoorB/UpIcon, "position:y", (arrowB_starting_pos.y), 1).set_trans(Tween.TRANS_SINE)
 

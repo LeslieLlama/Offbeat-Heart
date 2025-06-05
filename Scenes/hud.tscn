@@ -102,6 +102,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="MoonCounter" type="Label" parent="PausePanel/CollectiblesPanel"]
+layout_mode = 0
+offset_left = 184.0
+offset_top = 252.0
+offset_right = 228.0
+offset_bottom = 286.0
+text = "0/20"
+
 [node name="EgressPowerupSlot" type="Panel" parent="PausePanel"]
 texture_filter = 1
 layout_mode = 0

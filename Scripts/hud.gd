@@ -24,6 +24,7 @@ func collectible_aquired(powerup_name):
 		$PausePanel/JumpShroomPowerupSlot/TextureRect.visible = true
 	if powerup_name == "ghostwalk":
 		$PausePanel/GhostwalkPowerupSlot/TextureRect.visible = true
+	$PausePanel/CollectiblesPanel/MoonCounter.text = str(SaveSystem.number_of_moons,"/20")
 		
 func _process(delta: float) -> void:
 	$GlobalTimerMeter.value = 100-($GlobalTimer.time_left * 100)

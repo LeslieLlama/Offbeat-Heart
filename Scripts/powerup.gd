@@ -8,7 +8,7 @@ var starting_position : Vector2
 func _ready() -> void:
 	Signals.game_loaded.connect(_game_loaded)
 	starting_position = position
-	var tween = get_tree().create_tween().set_loops()
+	var tween = get_tree().create_tween().bind_node(self).set_loops()
 	tween.tween_property(self, "position:y", (starting_position.y-4), 1).set_trans(Tween.TRANS_SINE)
 	tween.tween_property(self, "position:y", (starting_position.y), 1).set_trans(Tween.TRANS_SINE)
 	$HintText.visible = false

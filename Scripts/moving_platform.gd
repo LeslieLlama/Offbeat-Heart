@@ -9,7 +9,7 @@ func _ready() -> void:
 	$PointB.visible = false
 	
 func start_tween():
-	var tween = get_tree().create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
+	var tween = get_tree().create_tween().bind_node(self).set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	tween.set_loops().set_parallel(false)
 	tween.tween_property($Platform, "position", $PointA.position, duration / 2).set_trans(Tween.TRANS_QUART)
 	tween.tween_property($Platform, "position", $PointB.position, duration / 2).set_trans(Tween.TRANS_QUART)

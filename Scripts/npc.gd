@@ -5,11 +5,13 @@ extends Node2D
 var line_num = 0
 var dialouge_sent : bool = false
 var starting_pos : Vector2
-
+var tweenA
 func _ready() -> void:
 	Signals.end_dialouge.connect(_refresh_speech)
 	starting_pos = $UpIcon.position
-	var tweenA = get_tree().create_tween().set_loops()
+	if tweenA:
+		tweenA.kill()
+	tweenA = get_tree().create_tween().bind_node(self).set_loops()
 	tweenA.tween_property($UpIcon, "position:y", (starting_pos.y-4), 1).set_trans(Tween.TRANS_SINE)
 	tweenA.tween_property($UpIcon, "position:y", (starting_pos.y), 1).set_trans(Tween.TRANS_SINE)
 

@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bgf7ork6sg4bu"]
+[gd_scene load_steps=4 format=3 uid="uid://bgf7ork6sg4bu"]
 
+[ext_resource type="Theme" uid="uid://c0jxtn6circlt" path="res://PixelWhiteTheme.tres" id="1_8saeu"]
 [ext_resource type="Script" uid="uid://ccwjagrvjwmkg" path="res://Scripts/main_menu.gd" id="1_853f1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8saeu"]
@@ -11,41 +12,66 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_8saeu")
 script = ExtResource("1_853f1")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
 offset_left = -1.0
+offset_top = 89.0
 offset_right = 481.0
 offset_bottom = 301.0
-color = Color(0.243137, 0.0627451, 0.215686, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -122.0
+offset_right = 480.0
+offset_bottom = 90.0
+color = Color(0.140447, 0.140447, 0.140447, 1)
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 67.0
-offset_top = 49.0
-offset_right = 403.0
-offset_bottom = 123.0
-theme_override_colors/font_color = Color(0.94902, 0.807843, 0.85098, 1)
+offset_left = 64.0
+offset_top = 20.0
+offset_right = 400.0
+offset_bottom = 151.0
+theme = ExtResource("1_8saeu")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 46
-text = "Off-Beat Heart "
+text = "Mirror
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 20.0
+offset_right = 400.0
+offset_bottom = 151.0
+theme = ExtResource("1_8saeu")
+theme_override_colors/font_color = Color(0.141176, 0.141176, 0.141176, 1)
+theme_override_font_sizes/font_size = 46
+text = "
+Museum"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="StartButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 90.0
-offset_top = 167.0
-offset_right = 212.0
-offset_bottom = 201.0
+offset_left = 168.0
+offset_top = 201.0
+offset_right = 290.0
+offset_bottom = 235.0
 text = "Start"
 
 [node name="ClearSaveButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 90.0
-offset_top = 206.0
-offset_right = 212.0
-offset_bottom = 240.0
+offset_left = 168.0
+offset_top = 240.0
+offset_right = 290.0
+offset_bottom = 274.0
 text = "Clear Save"
 
 [node name="ClearSavePanel" type="Panel" parent="."]
