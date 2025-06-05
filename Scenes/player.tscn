@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c6i0pa1ckktdo"]
+[gd_scene load_steps=13 format=3 uid="uid://c6i0pa1ckktdo"]
 
 [ext_resource type="Script" uid="uid://dwl2mefe0jmbq" path="res://Scripts/player_movement.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://v1n42rcr7afr" path="res://Sprites/HeartbeatTest.png" id="2_6t5aa"]
@@ -73,6 +73,9 @@ animations = [{
 radius = 5.0
 height = 16.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_6t5aa"]
+radius = 5.0
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_cvnsp")
 test_mode = true
@@ -113,3 +116,12 @@ position = Vector2(0, 8.485)
 texture = ExtResource("2_6t5aa")
 region_enabled = true
 region_rect = Rect2(15.9277, 15.9991, 16.0723, 0.980923)
+
+[node name="CameraBauble" type="CharacterBody2D" parent="." groups=["player"]]
+position = Vector2(0, -6)
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBauble"]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_6t5aa")

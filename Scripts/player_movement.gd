@@ -29,8 +29,8 @@ var has_jumpshroom_powerup : bool = false
 var has_ghostwalk_powerup : bool = false
 
 
-var new_area : Area2D
-var current_area : Area2D
+@export var new_area : Area2D
+@export var current_area : Area2D
 
 
 func _ready() -> void:
@@ -83,6 +83,7 @@ func _physics_process(delta):
 			velocity.y = jump_speed
 			current_jumps += 1
 			can_flip = false
+			Signals.emit_signal("player_jump")
 			
 	if Input.is_action_pressed("action_2") and has_ghostwalk_powerup == true:
 		if is_on_floor() || is_on_ceiling():
@@ -121,17 +122,20 @@ func _physics_process(delta):
 	#heldItem = item
 	
 func flip_dive():
-	is_flipped = !is_flipped
 	position.y += dive_offset
-	gravity *= -1
+	is_flipped = !is_flipped
 	jump_speed *= -1
 	dive_offset *= -1
+	up_direction *= -1
 	#animated_sprite.flip_v = !animated_sprite.flip_v
 	self.scale.y *= -1
+	
+	
 	#if is_flipped == true:
 		#animated_sprite.modulate = Color("000000")
 	#else:
 		#animated_sprite.modulate = Color("ffffff")
+	gravity *= -1
 	
 func ghost_walk(is_active : bool):
 	if is_active == true:
@@ -167,16 +171,16 @@ func _on_new_room_entered(area: Area2D) -> void:
 		_set_cam(area)
 		
 func _on_room_exited(area: Area2D):
-	if new_area == null:
-		return
+	#if new_area == null:
+		#return
 	if area == new_area:
 		return
 	_set_cam(area)
 	var varb = 0
-	position = Vector2(position.x+varb, position.y)
+	position = Vector2(position.x+varb, position.y+varb)
 	varb += 20
 	current_area = new_area
-	new_area = null
+	#new_area = null
 		
 func _set_cam(area: Area2D):
 	var collision_shape = new_area.get_node("CollisionShape2D")

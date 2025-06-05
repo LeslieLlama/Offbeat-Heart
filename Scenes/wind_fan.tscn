@@ -1,0 +1,82 @@
+[gd_scene load_steps=10 format=3 uid="uid://d0p7tht2lgv4y"]
+
+[ext_resource type="Script" uid="uid://3qx2p4d2fml8" path="res://Scripts/wind_fan.gd" id="1_1e8yc"]
+[ext_resource type="Texture2D" uid="uid://k70sw8ee5hn7" path="res://Sprites/FanSpritesheet.png" id="2_jwydh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_utw0c"]
+size = Vector2(32, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jlmes"]
+atlas = ExtResource("2_jwydh")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gf8j2"]
+atlas = ExtResource("2_jwydh")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nme1q"]
+atlas = ExtResource("2_jwydh")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8kbyd"]
+atlas = ExtResource("2_jwydh")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yncok"]
+atlas = ExtResource("2_jwydh")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7rtnj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jlmes")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gf8j2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nme1q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8kbyd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yncok")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8kbyd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nme1q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gf8j2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[node name="WindFan" type="Area2D"]
+script = ExtResource("1_1e8yc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -30)
+shape = SubResource("RectangleShape2D_utw0c")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_7rtnj")
+autoplay = "default"
+frame_progress = 0.907165
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(0, 13)
+emission_shape = 3
+emission_rect_extents = Vector2(17.425, 1)
+spread = 119.53
+gravity = Vector2(0, -200)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

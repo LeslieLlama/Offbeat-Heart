@@ -15,3 +15,5 @@ signal TurnEnd()
 
 signal new_dialouge(dialouge : String)
 signal end_dialouge()
+
+signal player_jump()
