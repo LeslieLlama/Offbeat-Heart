@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+@export var test_mode = false
+
 @export var speed = 200
 @export var jump_speed = -600
 @export var base_gravity = 3000
@@ -202,7 +204,8 @@ func _game_loaded():
 		has_jumpshroom_powerup = true
 	if SaveSystem.collectibles_gained.has("ghostwalk"):
 		has_ghostwalk_powerup = true
-	respawn()
+	if test_mode == false:
+		respawn()
 
 func aquire_powerup(powerup_name):
 	if powerup_name == "egress":

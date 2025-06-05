@@ -2,7 +2,7 @@ extends Node2D
 
 var target : Vector2
 
-var duration : float = 2
+@export var duration : float = 2
 func _ready() -> void:
 	start_tween()
 	$PointA.visible = false

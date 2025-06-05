@@ -75,6 +75,7 @@ height = 16.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_cvnsp")
+test_mode = true
 jump_speed = -400
 friction = 0.208
 
