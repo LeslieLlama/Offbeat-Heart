@@ -4,6 +4,8 @@ var pause_menu_on : bool = false
 var dialouge_panel_on : bool = false
 
 var rooms = []
+
+var not_active_room : Color = Color("545454")
 func _ready() -> void:
 	Signals.collectible_obtained.connect(collectible_aquired)
 	Signals.new_dialouge.connect(_new_dialouge)
@@ -51,7 +53,7 @@ func _close_dialouge():
 
 func _map_update(_area: Area2D):
 	for i in rooms.size():
-		$PausePanel/MapPanel/GridContainer.get_child(i).color = Color("White")
+		$PausePanel/MapPanel/GridContainer.get_child(i).color = not_active_room
 	
 	#480,300
 	var pos : Vector2
@@ -60,7 +62,7 @@ func _map_update(_area: Area2D):
 	
 	var cell = pos.y * $PausePanel/MapPanel/GridContainer.columns
 	cell += pos.x
-	$PausePanel/MapPanel/GridContainer.get_child(cell).color = Color("Red")
+	$PausePanel/MapPanel/GridContainer.get_child(cell).color = Color("White")
 		
 
 func _on_global_timer_timeout() -> void:

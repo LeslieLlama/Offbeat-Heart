@@ -87,7 +87,7 @@ func _physics_process(delta):
 	if Input.is_action_pressed("action_2") and has_ghostwalk_powerup == true:
 		if is_on_floor() || is_on_ceiling():
 			ghost_walk(true)
-	if Input.is_action_just_released("action_2"):
+	if Input.is_action_just_released("action_2") and has_ghostwalk_powerup == true:
 		ghost_walk(false)
 		
 	
@@ -150,6 +150,8 @@ func ghost_walk(is_active : bool):
 		$GhostFloorSprite.visible = true
 	else: 
 		gravity = base_gravity
+		if is_flipped:
+			gravity *= -1
 		is_ghost_walking = false
 		$GhostFloorSprite.visible = false
 	
@@ -166,8 +168,13 @@ func respawn():
 	print("respawn!")
 	animated_sprite.visible = true
 	is_dead = false
+	ghost_walk(false)
 	velocity = Vector2.ZERO
 	position = Vector2(SaveSystem.current_save_position.x, SaveSystem.current_save_position.y)
+	if is_flipped == true:
+		flip_dive()
+	
+	
 
 	
 func _on_new_room_entered(area: Area2D) -> void:

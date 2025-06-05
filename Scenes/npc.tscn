@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://d3i7i3xshom0x"]
+
+[ext_resource type="Script" uid="uid://cfrllwo0huxpu" path="res://Scripts/npc.gd" id="1_g6unj"]
+[ext_resource type="Texture2D" uid="uid://boi86imbwxyjs" path="res://Sprites/MusicNoteNPCs.png" id="2_h1ryf"]
+[ext_resource type="Texture2D" uid="uid://dgskqsn7j7ky5" path="res://Sprites/UpIcon.png" id="3_1ig1v"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yo1qh"]
+atlas = ExtResource("2_h1ryf")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3lklq"]
+atlas = ExtResource("2_h1ryf")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f5jmh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yo1qh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3lklq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="NPC_2" type="Node2D"]
+script = ExtResource("1_g6unj")
+lines = ["Please be careful up ahead, one of our art exibits, The Glass Spikes, seems to have breached containment", "Ehh?? it's all around the museum?? we'll need a big brush.."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_f5jmh")
+autoplay = "default"
+frame_progress = 0.589246
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(0, 4)
+target_position = Vector2(-25, 0)
+
+[node name="RayCast2D2" type="RayCast2D" parent="."]
+position = Vector2(0, 4)
+target_position = Vector2(26, 0)
+
+[node name="UpIcon" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1, -16)
+texture = ExtResource("3_1ig1v")

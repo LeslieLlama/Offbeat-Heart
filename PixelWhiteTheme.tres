@@ -1,0 +1,8 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://c0jxtn6circlt"]
+
+[ext_resource type="FontFile" uid="uid://bbqi6ggniiphp" path="res://Fonts/pixelmix/pixelmix.ttf" id="1_7pgon"]
+
+[resource]
+Button/fonts/font = ExtResource("1_7pgon")
+Label/font_sizes/font_size = 16
+Label/fonts/font = ExtResource("1_7pgon")
