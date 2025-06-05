@@ -135,6 +135,14 @@ func flip_dive():
 		#animated_sprite.modulate = Color("ffffff")
 	gravity *= -1
 	
+func normal_gravity_flip():
+	is_flipped = !is_flipped
+	jump_speed *= -1
+	dive_offset *= -1
+	up_direction *= -1
+	self.scale.y *= -1
+	gravity *= -1
+	
 func ghost_walk(is_active : bool):
 	if is_active == true:
 		gravity = 0
