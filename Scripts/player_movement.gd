@@ -10,8 +10,8 @@ var gravity = 3000
 @export_range(0.0 , 1.0) var acceleration = 0.25
 var cam : Camera2D 
 
-var current_jumps = 0
-var max_jumps = 1
+@export var current_jumps = 0
+@export var max_jumps = 1
 var dive_offset = 30
 #var heldItem : Node2D
 var facing_dir
@@ -29,8 +29,8 @@ var has_jumpshroom_powerup : bool = false
 var has_ghostwalk_powerup : bool = false
 
 
-@export var new_area : Area2D
-@export var current_area : Area2D
+var new_area : Area2D
+var current_area : Area2D
 
 
 func _ready() -> void:
@@ -73,11 +73,10 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("down") and (is_on_floor() or is_on_ceiling()):
 			flip_dive()
 		
-	
+	if is_on_floor() || is_on_ceiling():
+		current_jumps = 0
 	if Input.is_action_just_pressed("action_1"):
 		if is_ghost_walking == true:
-			return
-		if has_jumpshroom_powerup == false:
 			return
 		if current_jumps < max_jumps:
 			velocity.y = jump_speed
@@ -91,8 +90,7 @@ func _physics_process(delta):
 	if Input.is_action_just_released("action_2"):
 		ghost_walk(false)
 		
-	if is_on_floor() || is_on_ceiling():
-		current_jumps = 0
+	
 	if dir != 0 and (is_on_floor() or is_on_ceiling() or is_ghost_walking == true):
 		animated_sprite.play("walk")
 	#elif is_on_floor() == false and current_jumps >= 1:
@@ -206,6 +204,7 @@ func _game_loaded():
 		has_egress_powerup = true
 	if SaveSystem.collectibles_gained.has("jumpshroom"):
 		has_jumpshroom_powerup = true
+		max_jumps = 2
 	if SaveSystem.collectibles_gained.has("ghostwalk"):
 		has_ghostwalk_powerup = true
 	if test_mode == false:
@@ -216,6 +215,7 @@ func aquire_powerup(powerup_name):
 		has_egress_powerup = true
 	if powerup_name == "jumpshroom":
 		has_jumpshroom_powerup = true
+		max_jumps = 2
 	if powerup_name == "ghostwalk":
 		has_ghostwalk_powerup = true
 	

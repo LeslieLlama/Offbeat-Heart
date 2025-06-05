@@ -9,7 +9,7 @@ func _ready() -> void:
 	Signals.new_dialouge.connect(_new_dialouge)
 	Signals.new_room_entered.connect(_map_update)
 	Signals.game_loaded.connect(_game_loaded)
-	for i in 36:
+	for i in 30:
 		var child_node = ColorRect.new()
 		child_node.custom_minimum_size = Vector2(20,20)
 		rooms.append(child_node)
