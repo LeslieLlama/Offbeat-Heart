@@ -1,8 +1,9 @@
-[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://dsycma06x0ay4"]
+[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://dsycma06x0ay4"]
 
 [ext_resource type="Texture2D" uid="uid://v1n42rcr7afr" path="res://Sprites/HeartbeatTest.png" id="1_t02s1"]
 [ext_resource type="Texture2D" uid="uid://c2ueqg5k2dcoj" path="res://Sprites/Spikes.png" id="2_4emr5"]
 [ext_resource type="Texture2D" uid="uid://bt4f85gwettp4" path="res://Sprites/ThickBlockSpritesheet.png" id="3_3c6no"]
+[ext_resource type="Texture2D" uid="uid://b8gfeos0gljbg" path="res://Sprites/ChainFence.png" id="4_4emr5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3rba1"]
 texture = ExtResource("1_t02s1")
@@ -40,6 +41,12 @@ texture = ExtResource("3_3c6no")
 1:2/0 = 0
 1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3c6no"]
+texture = ExtResource("4_4emr5")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/0/custom_data_0 = true
+
 [resource]
 physics_layer_0/collision_layer = 1
 custom_data_layer_0/name = "Damage"
@@ -49,3 +56,4 @@ custom_data_layer_1/type = 1
 sources/0 = SubResource("TileSetAtlasSource_3rba1")
 sources/1 = SubResource("TileSetAtlasSource_546ff")
 sources/2 = SubResource("TileSetAtlasSource_yo1qh")
+sources/3 = SubResource("TileSetAtlasSource_3c6no")

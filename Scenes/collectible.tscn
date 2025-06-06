@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://ckk80uncglfiu"]
+[gd_scene load_steps=7 format=3 uid="uid://ckk80uncglfiu"]
 
 [ext_resource type="Script" uid="uid://b6wmq1db82kwq" path="res://Scripts/powerup.gd" id="1_dkaad"]
 [ext_resource type="Texture2D" uid="uid://bkqdxl7n5knue" path="res://Sprites/MoonIcon.png" id="2_athsx"]
 [ext_resource type="Theme" uid="uid://c0jxtn6circlt" path="res://PixelWhiteTheme.tres" id="3_7xeth"]
+[ext_resource type="Texture2D" uid="uid://bcfls2rkdk5jm" path="res://Sprites/Miniheart.png" id="4_ixlk2"]
+[ext_resource type="AudioStream" uid="uid://0uatgdynrr64" path="res://Audio/244536__xtrgamr__music-game-win-or-high-score.wav" id="5_hb6c1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pxd2v"]
 
@@ -28,5 +30,25 @@ theme = ExtResource("3_7xeth")
 theme_override_colors/font_color = Color(0.454902, 0.713726, 1, 0.329412)
 theme_override_font_sizes/font_size = 8
 text = "Hold X"
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+texture_filter = 1
+emitting = false
+amount = 40
+texture = ExtResource("4_ixlk2")
+lifetime = 0.7
+one_shot = true
+explosiveness = 0.59
+direction = Vector2(1, 1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 9.52
+initial_velocity_max = 276.3
+damping_min = 9.091
+damping_max = 31.313
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_hb6c1")
+volume_db = -10.0
 
 [connection signal="body_entered" from="." to="." method="_on_hitbox_body_entered"]

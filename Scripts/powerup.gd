@@ -13,6 +13,7 @@ func _ready() -> void:
 	tween.tween_property(self, "position:y", (starting_position.y), 1).set_trans(Tween.TRANS_SINE)
 	$HintText.visible = false
 	$HintText.text = hint_text
+	$CPUParticles2D.texture = $Sprite2D.texture
 	
 func _game_loaded():
 	if SaveSystem.collectibles_gained.has(powerup_name) == true:
@@ -26,6 +27,8 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 		#SaveSystem.moons_collected += 1
 		_enable_powerup(false)
 		Signals.emit_signal("collectible_obtained", powerup_name)
+		$CPUParticles2D.emitting = true
+		$AudioStreamPlayer.play()
 		
 			
 func _enable_powerup(turn_on : bool):

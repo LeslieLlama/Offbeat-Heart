@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bf6kthiki7c7q"]
+[gd_scene load_steps=8 format=3 uid="uid://bf6kthiki7c7q"]
 
 [ext_resource type="Script" uid="uid://cpbbpam8d58uj" path="res://Scripts/hud.gd" id="1_e0onf"]
 [ext_resource type="Texture2D" uid="uid://8t8i8h1itnqg" path="res://Sprites/EgressPowerupIcon.png" id="2_6fbih"]
 [ext_resource type="Theme" uid="uid://c0jxtn6circlt" path="res://PixelWhiteTheme.tres" id="2_t1xeu"]
+[ext_resource type="Texture2D" uid="uid://bkqdxl7n5knue" path="res://Sprites/MoonIcon.png" id="3_36asn"]
 [ext_resource type="Texture2D" uid="uid://bv8pftw7jprj0" path="res://Sprites/JumpPowerup_Icon.png.png" id="3_t1xeu"]
 [ext_resource type="Texture2D" uid="uid://cl2pk1vaxo6h0" path="res://Sprites/GhostwalkPowerupIcon.png.png" id="4_36asn"]
 
@@ -88,27 +89,27 @@ columns = 6
 [node name="CollectiblesPanel" type="Panel" parent="PausePanel"]
 texture_filter = 1
 layout_mode = 0
-offset_left = 228.0
-offset_top = 11.0
-offset_right = 471.0
-offset_bottom = 245.0
+offset_left = 207.0
+offset_top = 25.0
+offset_right = 450.0
+offset_bottom = 86.0
 theme = ExtResource("2_t1xeu")
-
-[node name="GridContainer" type="GridContainer" parent="PausePanel/CollectiblesPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="MoonCounter" type="Label" parent="PausePanel/CollectiblesPanel"]
 layout_mode = 0
-offset_left = 184.0
-offset_top = 252.0
-offset_right = 228.0
-offset_bottom = 286.0
+offset_left = 78.0
+offset_top = 22.0
+offset_right = 122.0
+offset_bottom = 56.0
 text = "0/20"
+
+[node name="TextureRect" type="TextureRect" parent="PausePanel/CollectiblesPanel"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 11.0
+offset_right = 68.0
+offset_bottom = 51.0
+texture = ExtResource("3_36asn")
 
 [node name="EgressPowerupSlot" type="Panel" parent="PausePanel"]
 texture_filter = 1

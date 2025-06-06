@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export var test_mode = false
+var rng = RandomNumberGenerator.new()
 
 @export var speed = 200
 @export var jump_speed = -600
@@ -82,6 +83,7 @@ func _physics_process(delta):
 			velocity.y = jump_speed
 			current_jumps += 1
 			can_flip = false
+			_jump_sound()
 			Signals.emit_signal("player_jump")
 			
 	if Input.is_action_pressed("action_2") and has_ghostwalk_powerup == true:
@@ -161,6 +163,7 @@ func external_death():
 	is_dead = true
 	animated_sprite.visible = false
 	$CPUParticles2D.emitting = true
+	$DeathSound.play()
 	await get_tree().create_timer(1).timeout
 	respawn()
 	
@@ -174,7 +177,10 @@ func respawn():
 	if is_flipped == true:
 		flip_dive()
 	
-	
+func _jump_sound():
+	var pitchRandomisation = rng.randf_range(1, 1.5)
+	$JumpSound.pitch_scale = pitchRandomisation
+	$JumpSound.play()
 
 	
 func _on_new_room_entered(area: Area2D) -> void:
