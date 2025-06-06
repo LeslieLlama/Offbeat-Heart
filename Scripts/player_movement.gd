@@ -53,6 +53,15 @@ func _process(delta: float) -> void:
 	if Input.is_key_pressed(KEY_R):
 		respawn()
 		
+	#respawn the player if they fall out of bounds somehow
+	if position.y > 3000:
+		respawn()
+	if position.y < -3000:
+		respawn()
+	if position.x > 4000: 
+		respawn()
+	if position.x < -4000: 
+		respawn()
 
 
 func _physics_process(delta):

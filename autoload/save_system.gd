@@ -1,7 +1,7 @@
 extends Node
 
-var starting_position : Vector2 = Vector2(1008,216) 
-var current_save_position : Vector2 = Vector2(1008,216) 
+var starting_position : Vector2 = Vector2(150,455) 
+var current_save_position : Vector2 = Vector2(150,455) 
 var collectibles_gained = []
 var number_of_moons = 0
 var number_of_powerups = 0

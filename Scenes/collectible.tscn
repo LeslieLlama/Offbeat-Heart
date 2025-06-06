@@ -22,14 +22,16 @@ shape = SubResource("RectangleShape2D_pxd2v")
 
 [node name="HintText" type="Label" parent="."]
 texture_filter = 1
-offset_left = -17.0
-offset_top = -35.0
-offset_right = 23.0
-offset_bottom = -12.0
+offset_left = -48.0
+offset_top = -46.0
+offset_right = 48.0
+offset_bottom = 6.0
 theme = ExtResource("3_7xeth")
 theme_override_colors/font_color = Color(0.454902, 0.713726, 1, 0.329412)
 theme_override_font_sizes/font_size = 8
-text = "Hold X"
+text = "Look below, with planted feet"
+horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 texture_filter = 1

@@ -18,6 +18,8 @@ func _ready() -> void:
 func _game_loaded():
 	if SaveSystem.collectibles_gained.has(powerup_name) == true:
 		_enable_powerup(false)
+	else:
+		print(powerup_name)
 	
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):

@@ -79,6 +79,7 @@ func _game_loaded():
 		$PausePanel/JumpShroomPowerupSlot/TextureRect.visible = true
 	if SaveSystem.collectibles_gained.has("ghostwalk"):
 		$PausePanel/GhostwalkPowerupSlot/TextureRect.visible = true
+	$PausePanel/CollectiblesPanel/MoonCounter.text = str(SaveSystem.number_of_moons,"/20")
 		
 
 
